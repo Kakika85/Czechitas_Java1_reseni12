@@ -1,0 +1,38 @@
+plugins {
+    id 'org.beryx.runtime' version '1.12.7'
+}
+
+group = 'cz.czechitas'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+application {
+    mainClass = "cz.czechitas.lekce12.Main"
+    applicationName = 'hello-world'
+}
+
+runtime {
+    imageZip = layout.buildDirectory.file("hello-world.zip")
+    jpackage {
+        imageName = "hello-world-${project.version}"
+    }
+}
+
